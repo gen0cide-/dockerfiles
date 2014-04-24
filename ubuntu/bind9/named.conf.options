@@ -11,20 +11,34 @@ options {
 	// the all-0's placeholder.
 
 	forwarders {
+		10.150.0.4;
 		8.8.8.8;
-		8.8.4.4;
 	};
 
 	allow-recursion { any; };
-	allow-query-cache { any; };
+	//allow-query-cache { any; };
 
 	//========================================================================
 	// If BIND logs error messages about the root key being expired,
 	// you will need to update your keys.  See https://www.isc.org/bind-keys
 	//========================================================================
-	dnssec-validation auto;
+	//dnssec-validation auto;
 
 	auth-nxdomain no;    # conform to RFC1035
 	listen-on-v6 { any; };
 };
 
+zone "warp-core.net" IN {
+  type forward;
+  forwarders { 10._X_0._X_0.4; };
+};
+
+zone "_X_0._X_0.10.in-addr.arpa" {
+  type forward;
+  forwarders { 10._X_0._X_0.4; };
+};
+
+zone "_X_0.16.172.in-addr.arpa" {
+  type forward;
+  forwarders { 10._X_0._X_0.4; };
+};
